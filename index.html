@@ -28,7 +28,6 @@
       overflow-x: hidden;
     }
 
-    /* ── decorative background blobs ── */
     body::before {
       content: '';
       position: fixed;
@@ -41,7 +40,6 @@
       z-index: 0;
     }
 
-    /* ── HERO ── */
     .hero {
       position: relative;
       z-index: 1;
@@ -68,10 +66,7 @@
       color: var(--dark);
     }
 
-    .hero h1 em {
-      font-style: italic;
-      color: var(--terracotta);
-    }
+    .hero h1 em { font-style: italic; color: var(--terracotta); }
 
     .hero-sub {
       font-size: 1rem;
@@ -82,7 +77,6 @@
 
     .hero-sub strong { color: var(--terracotta); font-weight: 700; }
 
-    /* ── event info inside form card ── */
     .event-info {
       background: #fdf1ea;
       border-radius: 16px;
@@ -91,321 +85,144 @@
       border: 1px solid #f0ddd0;
     }
 
-    .event-info-row {
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-    }
-
+    .event-info-row { display: flex; align-items: flex-start; gap: 14px; }
     .event-info-row + .event-info-row { margin-top: 14px; }
-
     .event-info-icon { font-size: 1.3rem; line-height: 1.4; }
-
-    .event-info p {
-      font-size: 0.9rem;
-      color: #9a7f70;
-      line-height: 1.55;
-    }
-
+    .event-info p { font-size: 0.9rem; color: #9a7f70; line-height: 1.55; }
     .event-info strong { font-weight: 500; color: #9a7f70; }
-
-    .event-info a {
-      color: #9a7f70;
-      text-decoration: underline;
-      font-weight: 500;
-    }
+    .event-info a { color: #9a7f70; text-decoration: underline; font-weight: 500; }
     .event-info a:hover { color: var(--terracotta); }
+    .event-info-note { font-size: 0.82rem; color: #9a7f70; font-style: italic; }
 
-    .event-info-note {
-      font-size: 0.82rem;
-      color: #9a7f70;
-      font-style: italic;
-    }
-
-    /* ── add to calendar ── */
-    .cal-block {
-      margin-top: 18px;
-      padding-top: 16px;
-      border-top: 1px solid #f0ddd0;
-    }
-
+    .cal-block { margin-top: 18px; padding-top: 16px; border-top: 1px solid #f0ddd0; }
     .cal-label {
-      display: block;
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--terracotta);
-      margin-bottom: 10px;
+      display: block; font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--terracotta); margin-bottom: 10px;
     }
-
-    .cal-buttons {
-      display: flex;
-      gap: 10px;
-    }
-
+    .cal-buttons { display: flex; gap: 10px; }
     .cal-btn {
-      flex: 1;
-      text-align: center;
-      padding: 10px 12px;
-      background: #fff;
-      border: 1.5px solid #e3cfc2;
-      border-radius: 10px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--dark);
-      text-decoration: none;
-      cursor: pointer;
+      flex: 1; text-align: center; padding: 10px 12px;
+      background: #fff; border: 1.5px solid #e3cfc2; border-radius: 10px;
+      font-size: 0.85rem; font-weight: 500; color: var(--dark);
+      text-decoration: none; cursor: pointer;
       transition: border-color 0.2s, background 0.2s, transform 0.15s;
     }
+    .cal-btn:hover { border-color: var(--terracotta); background: #fffaf5; transform: translateY(-1px); }
 
-    .cal-btn:hover {
-      border-color: var(--terracotta);
-      background: #fffaf5;
-      transform: translateY(-1px);
+    /* attendance choice */
+    .attendance { display: flex; gap: 12px; margin-bottom: 28px; }
+    .att-option {
+      flex: 1; text-align: center; padding: 16px 12px;
+      border: 1.5px solid #e3cfc2; border-radius: 14px; background: #fff;
+      font-size: 0.95rem; font-weight: 500; color: var(--dark);
+      cursor: pointer; user-select: none;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
     }
+    .att-option:hover { border-color: var(--terracotta); transform: translateY(-1px); }
+    .att-option.selected.vou { border-color: var(--sage); background: #eef4ef; color: #4d6b51; }
+    .att-option.selected.nao { border-color: var(--terracotta); background: #fdf1ea; color: var(--rust); }
 
-    /* ── companion header (title + remove) ── */
-    .companion-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
+    .companion-header { display: flex; justify-content: space-between; align-items: center; }
     .btn-remove {
-      background: none;
-      border: none;
-      color: #c0392b;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.74rem;
-      letter-spacing: 0.05em;
-      cursor: pointer;
-      padding: 4px 6px;
-      opacity: 0.7;
-      transition: opacity 0.2s;
+      background: none; border: none; color: #c0392b;
+      font-family: 'DM Sans', sans-serif; font-size: 0.74rem;
+      letter-spacing: 0.05em; cursor: pointer; padding: 4px 6px;
+      opacity: 0.7; transition: opacity 0.2s;
     }
     .btn-remove:hover { opacity: 1; }
 
-    /* ── add companion button ── */
     .btn-add {
-      width: 100%;
-      padding: 14px;
-      margin-top: 16px;
-      background: transparent;
-      color: var(--terracotta);
-      border: 1.5px dashed var(--blush);
-      border-radius: 12px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.92rem;
-      font-weight: 500;
-      cursor: pointer;
+      width: 100%; padding: 14px; margin-top: 16px;
+      background: transparent; color: var(--terracotta);
+      border: 1.5px dashed var(--blush); border-radius: 12px;
+      font-family: 'DM Sans', sans-serif; font-size: 0.92rem;
+      font-weight: 500; cursor: pointer;
       transition: background 0.2s, border-color 0.2s;
     }
-    .btn-add:hover {
-      background: #fdf1ea;
-      border-color: var(--terracotta);
-    }
+    .btn-add:hover { background: #fdf1ea; border-color: var(--terracotta); }
 
-    /* ── FORM SECTION ── */
     .form-section {
-      position: relative;
-      z-index: 1;
-      max-width: 620px;
-      margin: 0 auto;
-      padding: 0 24px 100px;
+      position: relative; z-index: 1; max-width: 620px;
+      margin: 0 auto; padding: 0 24px 100px;
     }
-
     .form-card {
-      background: var(--card);
-      border-radius: 28px;
-      padding: 48px 40px;
-      box-shadow:
-        0 2px 0 0 var(--blush),
-        0 8px 40px rgba(43,31,24,0.09),
-        0 1px 3px rgba(43,31,24,0.06);
+      background: var(--card); border-radius: 28px; padding: 48px 40px;
+      box-shadow: 0 2px 0 0 var(--blush), 0 8px 40px rgba(43,31,24,0.09), 0 1px 3px rgba(43,31,24,0.06);
       border: 1px solid #eddfd3;
     }
-
     .form-card h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      margin-bottom: 8px;
-      color: var(--dark);
+      font-family: 'Playfair Display', serif; font-size: 1.8rem;
+      margin-bottom: 8px; color: var(--dark);
     }
-
     .form-card .form-desc {
-      font-size: 0.9rem;
-      color: #9a7f70;
-      margin-bottom: 36px;
-      line-height: 1.6;
+      font-size: 0.9rem; color: #9a7f70; margin-bottom: 36px; line-height: 1.6;
     }
 
-    .field-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      margin-bottom: 24px;
-    }
-
+    .field-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 24px; }
     label {
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--terracotta);
+      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--terracotta);
     }
-
     input, select {
-      width: 100%;
-      padding: 14px 18px;
-      border: 1.5px solid #e3cfc2;
-      border-radius: 12px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.95rem;
-      color: var(--dark);
-      background: #fff;
-      transition: border-color 0.2s, box-shadow 0.2s;
-      outline: none;
-      appearance: none;
+      width: 100%; padding: 14px 18px; border: 1.5px solid #e3cfc2;
+      border-radius: 12px; font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem; color: var(--dark); background: #fff;
+      transition: border-color 0.2s, box-shadow 0.2s; outline: none; appearance: none;
     }
-
-    input:focus, select:focus {
-      border-color: var(--terracotta);
-      box-shadow: 0 0 0 3px rgba(201,111,74,0.12);
-    }
-
-    select {
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23c96f4a' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 14px center;
-      padding-right: 44px;
-      cursor: pointer;
-    }
-
-    /* ── guests block ── */
-    .guests-block {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
+    input:focus, select:focus { border-color: var(--terracotta); box-shadow: 0 0 0 3px rgba(201,111,74,0.12); }
 
     .guest-item {
-      background: #fdf1ea;
-      border-radius: 16px;
-      padding: 20px;
-      border: 1.5px solid #e8d4c6;
-      animation: slideIn 0.3s ease;
+      background: #fdf1ea; border-radius: 16px; padding: 20px;
+      border: 1.5px solid #e8d4c6; animation: slideIn 0.3s ease;
     }
-
     @keyframes slideIn {
       from { opacity: 0; transform: translateY(-8px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
     .guest-title {
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--sage);
-      margin-bottom: 14px;
+      font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--sage); margin-bottom: 14px;
     }
-
-    .guest-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
+    .guest-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
     @media (max-width: 480px) {
       .guest-row { grid-template-columns: 1fr; }
       .form-card { padding: 32px 24px; }
     }
 
-    /* ── submit button ── */
     .btn-submit {
-      width: 100%;
-      padding: 17px;
-      background: var(--terracotta);
-      color: #fff;
-      border: none;
-      border-radius: 14px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 1rem;
-      font-weight: 500;
-      cursor: pointer;
-      letter-spacing: 0.03em;
+      width: 100%; padding: 17px; background: var(--terracotta);
+      color: #fff; border: none; border-radius: 14px;
+      font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 500;
+      cursor: pointer; letter-spacing: 0.03em;
       transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
-      box-shadow: 0 4px 16px rgba(201,111,74,0.35);
-      margin-top: 8px;
+      box-shadow: 0 4px 16px rgba(201,111,74,0.35); margin-top: 8px;
     }
-
-    .btn-submit:hover {
-      background: var(--rust);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(201,111,74,0.4);
-    }
-
+    .btn-submit:hover { background: var(--rust); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,111,74,0.4); }
     .btn-submit:active { transform: translateY(0); }
+    .btn-submit:disabled { background: #c9a898; cursor: not-allowed; transform: none; box-shadow: none; }
 
-    .btn-submit:disabled {
-      background: #c9a898;
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
-    }
-
-    /* ── success state ── */
-    .success-state {
-      display: none;
-      text-align: center;
-      padding: 40px 20px;
-    }
-
+    .success-state { display: none; text-align: center; padding: 40px 20px; }
     .success-state .big-emoji { font-size: 3.5rem; margin-bottom: 16px; }
-
-    .success-state h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      margin-bottom: 10px;
-    }
-
+    .success-state h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 10px; }
     .success-state p { color: #9a7f70; font-size: 0.95rem; line-height: 1.6; }
 
-    /* ── error msg ── */
-    .error-msg {
-      font-size: 0.82rem;
-      color: #c0392b;
-      margin-top: 12px;
-      text-align: center;
-      display: none;
-    }
+    .error-msg { font-size: 0.82rem; color: #c0392b; margin-top: 12px; text-align: center; display: none; }
 
-    /* ── footer ── */
     footer {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      padding: 24px;
-      font-size: 0.78rem;
-      color: #c4ac9f;
-      letter-spacing: 0.05em;
+      position: relative; z-index: 1; text-align: center; padding: 24px;
+      font-size: 0.78rem; color: #c4ac9f; letter-spacing: 0.05em;
     }
 
-    /* ── divider ── */
     .divider {
-      width: 48px;
-      height: 3px;
+      width: 48px; height: 3px;
       background: linear-gradient(90deg, var(--blush), var(--terracotta));
-      border-radius: 999px;
-      margin: 28px auto 24px;
+      border-radius: 999px; margin: 28px auto 24px;
     }
   </style>
 </head>
 <body>
 
-  <!-- HERO -->
   <section class="hero">
     <p class="hero-tag">✦ Você está convidado ✦</p>
     <h1>Vem <em>celebrar</em><br>comigo!</h1>
@@ -415,16 +232,13 @@
     </p>
   </section>
 
-  <!-- FORM -->
   <section class="form-section">
     <div class="form-card">
 
-      <!-- form view -->
       <div id="formView">
         <h2>Confirmar presença</h2>
         <p class="form-desc">Preencha seus dados abaixo 🌸<br>Sua confirmação me ajuda a organizar as comidinhas e drinks 🍸</p>
 
-        <!-- event details inside the card -->
         <div class="event-info">
           <div class="event-info-row">
             <span class="event-info-icon">📅</span>
@@ -439,7 +253,6 @@
             <p><strong>A partir das 17h</strong><br><span class="event-info-note">o horário pode ser ajustado dependendo do jogo do Brasil ⚽</span></p>
           </div>
 
-          <!-- add to calendar -->
           <div class="cal-block">
             <span class="cal-label">Adicionar ao calendário</span>
             <div class="cal-buttons">
@@ -451,55 +264,66 @@
 
         <div class="divider"></div>
 
-        <!-- titular -->
-        <div class="guest-item">
-          <p class="guest-title">✦ Você</p>
-          <div class="guest-row">
-            <div class="field-group" style="margin-bottom:0">
-              <label>Nome completo</label>
-              <input type="text" class="g-nome" id="titularNome" placeholder="Seu nome" autocomplete="name" />
-            </div>
-            <div class="field-group" style="margin-bottom:0">
-              <label>Documento (RG / CPF)</label>
-              <input type="text" class="g-doc" id="titularDoc" placeholder="Nº do documento" />
-            </div>
-          </div>
+        <label style="margin-bottom:10px; display:block;">Você vai poder ir?</label>
+        <div class="attendance">
+          <div class="att-option vou" id="optVou" onclick="setAttendance('vou')">Vou! 🎉</div>
+          <div class="att-option nao" id="optNao" onclick="setAttendance('nao')">Não vou 😢</div>
         </div>
 
-        <!-- acompanhante (oculto até clicar) -->
-        <div class="guest-item" id="companionBlock" style="display:none; margin-top:16px;">
-          <div class="companion-header">
-            <p class="guest-title" style="margin-bottom:0">✦ Acompanhante</p>
-            <button type="button" class="btn-remove" onclick="removeCompanion()">remover ✕</button>
-          </div>
-          <div class="guest-row" style="margin-top:14px;">
-            <div class="field-group" style="margin-bottom:0">
-              <label>Nome completo</label>
-              <input type="text" class="g-nome" id="acompNome" placeholder="Nome do acompanhante" />
-            </div>
-            <div class="field-group" style="margin-bottom:0">
-              <label>Documento (RG / CPF)</label>
-              <input type="text" class="g-doc" id="acompDoc" placeholder="Nº do documento" />
+        <div id="guestFields">
+          <div class="guest-item">
+            <p class="guest-title">✦ Você</p>
+            <div class="guest-row">
+              <div class="field-group" style="margin-bottom:0">
+                <label>Nome completo</label>
+                <input type="text" class="g-nome" id="titularNome" placeholder="Seu nome" autocomplete="name" />
+              </div>
+              <div class="field-group" style="margin-bottom:0">
+                <label>Documento (RG / CPF)</label>
+                <input type="text" class="g-doc" id="titularDoc" placeholder="Nº do documento" />
+              </div>
             </div>
           </div>
+
+          <div class="guest-item" id="companionBlock" style="display:none; margin-top:16px;">
+            <div class="companion-header">
+              <p class="guest-title" style="margin-bottom:0">✦ Acompanhante</p>
+              <button type="button" class="btn-remove" onclick="removeCompanion()">remover ✕</button>
+            </div>
+            <div class="guest-row" style="margin-top:14px;">
+              <div class="field-group" style="margin-bottom:0">
+                <label>Nome completo</label>
+                <input type="text" class="g-nome" id="acompNome" placeholder="Nome do acompanhante" />
+              </div>
+              <div class="field-group" style="margin-bottom:0">
+                <label>Documento (RG / CPF)</label>
+                <input type="text" class="g-doc" id="acompDoc" placeholder="Nº do documento" />
+              </div>
+            </div>
+          </div>
+
+          <button type="button" class="btn-add" id="btnAdd" onclick="addCompanion()">
+            + Incluir um acompanhante
+          </button>
         </div>
 
-        <!-- botão adicionar acompanhante -->
-        <button type="button" class="btn-add" id="btnAdd" onclick="addCompanion()">
-          + Incluir um acompanhante
-        </button>
+        <div id="nameOnlyField" style="display:none;">
+          <div class="field-group">
+            <label>Seu nome</label>
+            <input type="text" id="nomeNaoVou" placeholder="Como você se chama?" autocomplete="name" />
+          </div>
+        </div>
 
         <button class="btn-submit" id="btnSubmit" onclick="submitForm()">
-          Confirmar presença 🎂
+          Enviar resposta 🎂
         </button>
         <p class="error-msg" id="errorMsg">Por favor, preencha todos os campos antes de enviar.</p>
       </div>
 
-      <!-- success view -->
       <div class="success-state" id="successView">
-        <div class="big-emoji">🥳</div>
-        <h3>Presença confirmada!</h3>
-        <p>Boa, você confirmou! Anota aí a data e aparece com energia porque vai ser incrível. Te vejo lá! 🎊</p>
+        <div class="big-emoji" id="successEmoji">🥳</div>
+        <h3 id="successTitle">Presença confirmada!</h3>
+        <p id="successText">Boa, você confirmou! Anota aí a data e aparece com energia porque vai ser incrível. Te vejo lá! 🎊</p>
       </div>
 
     </div>
@@ -512,21 +336,19 @@
     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw_Mw8bvjUeJFgY9v29FykXR6EZHTV9kYMHc4Snw5kZ8hnDmlu8NDCmsnvAGOVYSYB79w/exec';
     // ────────────────────────────────────────────────────────────────────
 
-    // ── dados do evento para o calendário ──
     const EVENTO = {
       titulo: '30 anos da Ju Bet 🎂',
       local: 'Espaço Commu — Rua Dulio, 273, Vila Romana, São Paulo',
       descricao: 'Vem celebrar! A partir das 17h. O horário pode ser ajustado dependendo do jogo do Brasil.',
-      inicio: '20260704T170000', // 4 jul 2026, 17h (horário local)
-      fim:    '20260704T230000', // duração padrão 3h
+      inicio: '20260704T170000',
+      fim:    '20260704T230000',
     };
 
-    // Google Calendar + Apple (.ics)
     (function () {
       const g = new URL('https://calendar.google.com/calendar/render');
       g.searchParams.set('action', 'TEMPLATE');
       g.searchParams.set('text', EVENTO.titulo);
-      g.searchParams.set('dates', `${EVENTO.inicio}/${EVENTO.fim}`);
+      g.searchParams.set('dates', EVENTO.inicio + '/' + EVENTO.fim);
       g.searchParams.set('details', EVENTO.descricao);
       g.searchParams.set('location', EVENTO.local);
       g.searchParams.set('ctz', 'America/Sao_Paulo');
@@ -537,18 +359,29 @@
         'VERSION:2.0',
         'PRODID:-//Aniversario//PT-BR//',
         'BEGIN:VEVENT',
-        `UID:${Date.now()}@aniversario`,
-        `DTSTART;TZID=America/Sao_Paulo:${EVENTO.inicio}`,
-        `DTEND;TZID=America/Sao_Paulo:${EVENTO.fim}`,
-        `SUMMARY:${EVENTO.titulo}`,
-        `LOCATION:${EVENTO.local}`,
-        `DESCRIPTION:${EVENTO.descricao}`,
+        'UID:' + Date.now() + '@aniversario',
+        'DTSTART;TZID=America/Sao_Paulo:' + EVENTO.inicio,
+        'DTEND;TZID=America/Sao_Paulo:' + EVENTO.fim,
+        'SUMMARY:' + EVENTO.titulo,
+        'LOCATION:' + EVENTO.local,
+        'DESCRIPTION:' + EVENTO.descricao,
         'END:VEVENT',
         'END:VCALENDAR',
       ].join('\r\n');
       const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
       document.getElementById('calApple').href = URL.createObjectURL(blob);
     })();
+
+    let attendance = null;
+
+    function setAttendance(value) {
+      attendance = value;
+      document.getElementById('optVou').classList.toggle('selected', value === 'vou');
+      document.getElementById('optNao').classList.toggle('selected', value === 'nao');
+      document.getElementById('guestFields').style.display   = value === 'vou' ? 'block' : 'none';
+      document.getElementById('nameOnlyField').style.display = value === 'nao' ? 'block' : 'none';
+      document.getElementById('errorMsg').style.display = 'none';
+    }
 
     function addCompanion() {
       document.getElementById('companionBlock').style.display = 'block';
@@ -563,44 +396,52 @@
     }
 
     async function submitForm() {
-      const titularNome = document.getElementById('titularNome').value.trim();
-      const titularDoc  = document.getElementById('titularDoc').value.trim();
-
-      const companionVisible = document.getElementById('companionBlock').style.display !== 'none';
-      const acompNome = document.getElementById('acompNome').value.trim();
-      const acompDoc  = document.getElementById('acompDoc').value.trim();
-
       const errorEl = document.getElementById('errorMsg');
       errorEl.style.display = 'none';
 
-      // validação titular
-      if (!titularNome || !titularDoc) {
-        errorEl.textContent = 'Por favor, preencha seu nome e documento.';
+      if (!attendance) {
+        errorEl.textContent = 'Por favor, escolha se você vai ou não vai.';
         errorEl.style.display = 'block';
         return;
       }
 
-      // validação acompanhante (só se estiver incluído)
-      if (companionVisible && (!acompNome || !acompDoc)) {
-        errorEl.textContent = 'Preencha o nome e documento do acompanhante, ou remova-o.';
-        errorEl.style.display = 'block';
-        return;
-      }
+      let payload;
 
-      const convidados = [{ nome: titularNome, documento: titularDoc }];
-      if (companionVisible) {
-        convidados.push({ nome: acompNome, documento: acompDoc });
+      if (attendance === 'nao') {
+        const nome = document.getElementById('nomeNaoVou').value.trim();
+        if (!nome) {
+          errorEl.textContent = 'Por favor, preencha seu nome.';
+          errorEl.style.display = 'block';
+          return;
+        }
+        payload = { presenca: 'Não vou', responsavel: nome, quantidade: 0, convidados: [] };
+      } else {
+        const titularNome = document.getElementById('titularNome').value.trim();
+        const titularDoc  = document.getElementById('titularDoc').value.trim();
+        const companionVisible = document.getElementById('companionBlock').style.display !== 'none';
+        const acompNome = document.getElementById('acompNome').value.trim();
+        const acompDoc  = document.getElementById('acompDoc').value.trim();
+
+        if (!titularNome || !titularDoc) {
+          errorEl.textContent = 'Por favor, preencha seu nome e documento.';
+          errorEl.style.display = 'block';
+          return;
+        }
+        if (companionVisible && (!acompNome || !acompDoc)) {
+          errorEl.textContent = 'Preencha o nome e documento do acompanhante, ou remova-o.';
+          errorEl.style.display = 'block';
+          return;
+        }
+
+        const convidados = [{ nome: titularNome, documento: titularDoc }];
+        if (companionVisible) convidados.push({ nome: acompNome, documento: acompDoc });
+
+        payload = { presenca: 'Vou', responsavel: titularNome, quantidade: convidados.length, convidados: convidados };
       }
 
       const btn = document.getElementById('btnSubmit');
       btn.disabled = true;
       btn.textContent = 'Enviando…';
-
-      const payload = {
-        responsavel: titularNome,
-        quantidade: convidados.length,
-        convidados: convidados
-      };
 
       try {
         await fetch(SCRIPT_URL, {
@@ -610,12 +451,17 @@
           body: JSON.stringify(payload)
         });
 
+        if (attendance === 'nao') {
+          document.getElementById('successEmoji').textContent = '💛';
+          document.getElementById('successTitle').textContent = 'Resposta enviada';
+          document.getElementById('successText').textContent = 'Que pena que você não vai poder ir! Obrigada por avisar — vou sentir sua falta. 💛';
+        }
         document.getElementById('formView').style.display = 'none';
         document.getElementById('successView').style.display = 'block';
 
       } catch (err) {
         btn.disabled = false;
-        btn.textContent = 'Confirmar presença 🎂';
+        btn.textContent = 'Enviar resposta 🎂';
         errorEl.textContent = 'Ocorreu um erro ao enviar. Tente novamente.';
         errorEl.style.display = 'block';
       }
