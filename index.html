@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Confirme sua presença 🎂</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #fdf6ee;
+      --blush: #f2c4b0;
+      --terracotta: #c96f4a;
+      --rust: #9c4a2c;
+      --sage: #8aab8e;
+      --dark: #2b1f18;
+      --card: #fffaf5;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--cream);
+      color: var(--dark);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── decorative background blobs ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 10% 20%, #f2c4b022 0%, transparent 70%),
+        radial-gradient(ellipse 50% 60% at 90% 80%, #8aab8e22 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 70% 10%, #c96f4a18 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      z-index: 1;
+      padding: 80px 24px 60px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .hero-tag {
+      font-size: 12px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      font-weight: 500;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 8vw, 5.5rem);
+      line-height: 1.05;
+      color: var(--dark);
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--terracotta);
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      color: #7a6558;
+      max-width: 400px;
+      line-height: 1.7;
+    }
+
+    /* ── event info inside form card ── */
+    .event-info {
+      background: #fdf1ea;
+      border-radius: 16px;
+      padding: 20px 22px;
+      margin-bottom: 4px;
+      border: 1px solid #f0ddd0;
+    }
+
+    .event-info-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .event-info-row + .event-info-row { margin-top: 14px; }
+
+    .event-info-icon { font-size: 1.3rem; line-height: 1.4; }
+
+    .event-info p {
+      font-size: 0.9rem;
+      color: #9a7f70;
+      line-height: 1.55;
+    }
+
+    .event-info strong { font-weight: 500; color: #9a7f70; }
+
+    .event-info a {
+      color: #9a7f70;
+      text-decoration: underline;
+      font-weight: 500;
+    }
+    .event-info a:hover { color: var(--terracotta); }
+
+    .event-info-note {
+      font-size: 0.82rem;
+      color: #9a7f70;
+      font-style: italic;
+    }
+
+    /* ── companion header (title + remove) ── */
+    .companion-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .btn-remove {
+      background: none;
+      border: none;
+      color: #c0392b;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.74rem;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      padding: 4px 6px;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .btn-remove:hover { opacity: 1; }
+
+    /* ── add companion button ── */
+    .btn-add {
+      width: 100%;
+      padding: 14px;
+      margin-top: 16px;
+      background: transparent;
+      color: var(--terracotta);
+      border: 1.5px dashed var(--blush);
+      border-radius: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .btn-add:hover {
+      background: #fdf1ea;
+      border-color: var(--terracotta);
+    }
+
+    /* ── FORM SECTION ── */
+    .form-section {
+      position: relative;
+      z-index: 1;
+      max-width: 620px;
+      margin: 0 auto;
+      padding: 0 24px 100px;
+    }
+
+    .form-card {
+      background: var(--card);
+      border-radius: 28px;
+      padding: 48px 40px;
+      box-shadow:
+        0 2px 0 0 var(--blush),
+        0 8px 40px rgba(43,31,24,0.09),
+        0 1px 3px rgba(43,31,24,0.06);
+      border: 1px solid #eddfd3;
+    }
+
+    .form-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      margin-bottom: 8px;
+      color: var(--dark);
+    }
+
+    .form-card .form-desc {
+      font-size: 0.9rem;
+      color: #9a7f70;
+      margin-bottom: 36px;
+      line-height: 1.6;
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+
+    label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+    }
+
+    input, select {
+      width: 100%;
+      padding: 14px 18px;
+      border: 1.5px solid #e3cfc2;
+      border-radius: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.95rem;
+      color: var(--dark);
+      background: #fff;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      appearance: none;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--terracotta);
+      box-shadow: 0 0 0 3px rgba(201,111,74,0.12);
+    }
+
+    select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23c96f4a' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 44px;
+      cursor: pointer;
+    }
+
+    /* ── guests block ── */
+    .guests-block {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .guest-item {
+      background: #fdf1ea;
+      border-radius: 16px;
+      padding: 20px;
+      border: 1.5px solid #e8d4c6;
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .guest-title {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--sage);
+      margin-bottom: 14px;
+    }
+
+    .guest-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 480px) {
+      .guest-row { grid-template-columns: 1fr; }
+      .form-card { padding: 32px 24px; }
+    }
+
+    /* ── submit button ── */
+    .btn-submit {
+      width: 100%;
+      padding: 17px;
+      background: var(--terracotta);
+      color: #fff;
+      border: none;
+      border-radius: 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 4px 16px rgba(201,111,74,0.35);
+      margin-top: 8px;
+    }
+
+    .btn-submit:hover {
+      background: var(--rust);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(201,111,74,0.4);
+    }
+
+    .btn-submit:active { transform: translateY(0); }
+
+    .btn-submit:disabled {
+      background: #c9a898;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* ── success state ── */
+    .success-state {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .success-state .big-emoji { font-size: 3.5rem; margin-bottom: 16px; }
+
+    .success-state h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+    }
+
+    .success-state p { color: #9a7f70; font-size: 0.95rem; line-height: 1.6; }
+
+    /* ── error msg ── */
+    .error-msg {
+      font-size: 0.82rem;
+      color: #c0392b;
+      margin-top: 12px;
+      text-align: center;
+      display: none;
+    }
+
+    /* ── footer ── */
+    footer {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 24px;
+      font-size: 0.78rem;
+      color: #c4ac9f;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── divider ── */
+    .divider {
+      width: 48px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blush), var(--terracotta));
+      border-radius: 999px;
+      margin: 28px auto 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-tag">✦ Você está convidado ✦</p>
+    <h1>Vem <em>celebrar</em><br>comigo!</h1>
+    <p class="hero-sub">
+      Confirme sua presença abaixo —
+      mal posso esperar para te ver! 🎉
+    </p>
+  </section>
+
+  <!-- FORM -->
+  <section class="form-section">
+    <div class="form-card">
+
+      <!-- form view -->
+      <div id="formView">
+        <h2>Confirmar presença</h2>
+        <p class="form-desc">Preencha seus dados abaixo 🌸</p>
+
+        <!-- event details inside the card -->
+        <div class="event-info">
+          <div class="event-info-row">
+            <span class="event-info-icon">📍</span>
+            <p><strong>Espaço Commu</strong> <a href="https://instagram.com/commubr" target="_blank">@commubr</a><br>Rua Dulio, 273 — Vila Romana, São Paulo</p>
+          </div>
+          <div class="event-info-row">
+            <span class="event-info-icon">🕔</span>
+            <p><strong>A partir das 17h</strong><br><span class="event-info-note">o horário pode ser ajustado dependendo do jogo do Brasil ⚽</span></p>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- titular -->
+        <div class="guest-item">
+          <p class="guest-title">✦ Você</p>
+          <div class="guest-row">
+            <div class="field-group" style="margin-bottom:0">
+              <label>Nome completo</label>
+              <input type="text" class="g-nome" id="titularNome" placeholder="Seu nome" autocomplete="name" />
+            </div>
+            <div class="field-group" style="margin-bottom:0">
+              <label>Documento (RG / CPF)</label>
+              <input type="text" class="g-doc" id="titularDoc" placeholder="Nº do documento" />
+            </div>
+          </div>
+        </div>
+
+        <!-- acompanhante (oculto até clicar) -->
+        <div class="guest-item" id="companionBlock" style="display:none; margin-top:16px;">
+          <div class="companion-header">
+            <p class="guest-title" style="margin-bottom:0">✦ Acompanhante</p>
+            <button type="button" class="btn-remove" onclick="removeCompanion()">remover ✕</button>
+          </div>
+          <div class="guest-row" style="margin-top:14px;">
+            <div class="field-group" style="margin-bottom:0">
+              <label>Nome completo</label>
+              <input type="text" class="g-nome" id="acompNome" placeholder="Nome do acompanhante" />
+            </div>
+            <div class="field-group" style="margin-bottom:0">
+              <label>Documento (RG / CPF)</label>
+              <input type="text" class="g-doc" id="acompDoc" placeholder="Nº do documento" />
+            </div>
+          </div>
+        </div>
+
+        <!-- botão adicionar acompanhante -->
+        <button type="button" class="btn-add" id="btnAdd" onclick="addCompanion()">
+          + Incluir um acompanhante
+        </button>
+
+        <button class="btn-submit" id="btnSubmit" onclick="submitForm()">
+          Confirmar presença 🎂
+        </button>
+        <p class="error-msg" id="errorMsg">Por favor, preencha todos os campos antes de enviar.</p>
+      </div>
+
+      <!-- success view -->
+      <div class="success-state" id="successView">
+        <div class="big-emoji">🥳</div>
+        <h3>Presença confirmada!</h3>
+        <p>Boa, você confirmou! Anota aí a data e aparece com energia porque vai ser incrível. Te vejo lá! 🎊</p>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>feito com muito amor ✦ nos vemos em breve</footer>
+
+  <script>
+    // ── CONFIG: cole aqui a URL do seu Google Apps Script ──────────────
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw_Mw8bvjUeJFgY9v29FykXR6EZHTV9kYMHc4Snw5kZ8hnDmlu8NDCmsnvAGOVYSYB79w/exec' ;
+    // ────────────────────────────────────────────────────────────────────
+
+    function addCompanion() {
+      document.getElementById('companionBlock').style.display = 'block';
+      document.getElementById('btnAdd').style.display = 'none';
+    }
+
+    function removeCompanion() {
+      document.getElementById('companionBlock').style.display = 'none';
+      document.getElementById('btnAdd').style.display = 'block';
+      document.getElementById('acompNome').value = '';
+      document.getElementById('acompDoc').value = '';
+    }
+
+    async function submitForm() {
+      const titularNome = document.getElementById('titularNome').value.trim();
+      const titularDoc  = document.getElementById('titularDoc').value.trim();
+
+      const companionVisible = document.getElementById('companionBlock').style.display !== 'none';
+      const acompNome = document.getElementById('acompNome').value.trim();
+      const acompDoc  = document.getElementById('acompDoc').value.trim();
+
+      const errorEl = document.getElementById('errorMsg');
+      errorEl.style.display = 'none';
+
+      // validação titular
+      if (!titularNome || !titularDoc) {
+        errorEl.textContent = 'Por favor, preencha seu nome e documento.';
+        errorEl.style.display = 'block';
+        return;
+      }
+
+      // validação acompanhante (só se estiver incluído)
+      if (companionVisible && (!acompNome || !acompDoc)) {
+        errorEl.textContent = 'Preencha o nome e documento do acompanhante, ou remova-o.';
+        errorEl.style.display = 'block';
+        return;
+      }
+
+      const convidados = [{ nome: titularNome, documento: titularDoc }];
+      if (companionVisible) {
+        convidados.push({ nome: acompNome, documento: acompDoc });
+      }
+
+      const btn = document.getElementById('btnSubmit');
+      btn.disabled = true;
+      btn.textContent = 'Enviando…';
+
+      const payload = {
+        responsavel: titularNome,
+        quantidade: convidados.length,
+        convidados: convidados
+      };
+
+      try {
+        await fetch(SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        document.getElementById('formView').style.display = 'none';
+        document.getElementById('successView').style.display = 'block';
+
+      } catch (err) {
+        btn.disabled = false;
+        btn.textContent = 'Confirmar presença 🎂';
+        errorEl.textContent = 'Ocorreu um erro ao enviar. Tente novamente.';
+        errorEl.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>
