@@ -80,6 +80,8 @@
       line-height: 1.7;
     }
 
+    .hero-sub strong { color: var(--terracotta); font-weight: 700; }
+
     /* ── event info inside form card ── */
     .event-info {
       background: #fdf1ea;
@@ -118,6 +120,49 @@
       font-size: 0.82rem;
       color: #9a7f70;
       font-style: italic;
+    }
+
+    /* ── add to calendar ── */
+    .cal-block {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid #f0ddd0;
+    }
+
+    .cal-label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 10px;
+    }
+
+    .cal-buttons {
+      display: flex;
+      gap: 10px;
+    }
+
+    .cal-btn {
+      flex: 1;
+      text-align: center;
+      padding: 10px 12px;
+      background: #fff;
+      border: 1.5px solid #e3cfc2;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--dark);
+      text-decoration: none;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    }
+
+    .cal-btn:hover {
+      border-color: var(--terracotta);
+      background: #fffaf5;
+      transform: translateY(-1px);
     }
 
     /* ── companion header (title + remove) ── */
@@ -365,8 +410,8 @@
     <p class="hero-tag">✦ Você está convidado ✦</p>
     <h1>Vem <em>celebrar</em><br>comigo!</h1>
     <p class="hero-sub">
-      Confirme sua presença abaixo —
-      mal posso esperar para te ver! 🎉
+      Confirme sua presença abaixo — vou comemorar meus
+      <strong>30 anos</strong> e mal posso esperar para te ver! 🎉
     </p>
   </section>
 
@@ -377,10 +422,14 @@
       <!-- form view -->
       <div id="formView">
         <h2>Confirmar presença</h2>
-        <p class="form-desc">Preencha seus dados abaixo 🌸</p>
+        <p class="form-desc">Preencha seus dados abaixo 🌸<br>Sua confirmação me ajuda a organizar as comidinhas e drinks 🍸</p>
 
         <!-- event details inside the card -->
         <div class="event-info">
+          <div class="event-info-row">
+            <span class="event-info-icon">📅</span>
+            <p><strong>Sábado, 4 de julho</strong></p>
+          </div>
           <div class="event-info-row">
             <span class="event-info-icon">📍</span>
             <p><strong>Espaço Commu</strong> <a href="https://instagram.com/commubr" target="_blank">@commubr</a><br>Rua Dulio, 273 — Vila Romana, São Paulo</p>
@@ -388,6 +437,15 @@
           <div class="event-info-row">
             <span class="event-info-icon">🕔</span>
             <p><strong>A partir das 17h</strong><br><span class="event-info-note">o horário pode ser ajustado dependendo do jogo do Brasil ⚽</span></p>
+          </div>
+
+          <!-- add to calendar -->
+          <div class="cal-block">
+            <span class="cal-label">Adicionar ao calendário</span>
+            <div class="cal-buttons">
+              <a class="cal-btn" id="calGoogle" target="_blank" rel="noopener">📅 Google</a>
+              <a class="cal-btn" id="calApple" download="aniversario.ics">🍎 Apple</a>
+            </div>
           </div>
         </div>
 
@@ -451,8 +509,46 @@
 
   <script>
     // ── CONFIG: cole aqui a URL do seu Google Apps Script ──────────────
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw_Mw8bvjUeJFgY9v29FykXR6EZHTV9kYMHc4Snw5kZ8hnDmlu8NDCmsnvAGOVYSYB79w/exec' ;
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw_Mw8bvjUeJFgY9v29FykXR6EZHTV9kYMHc4Snw5kZ8hnDmlu8NDCmsnvAGOVYSYB79w/exec';
     // ────────────────────────────────────────────────────────────────────
+
+    // ── dados do evento para o calendário ──
+    const EVENTO = {
+      titulo: 'Festa de 30 anos 🎂',
+      local: 'Espaço Commu — Rua Dulio, 273, Vila Romana, São Paulo',
+      descricao: 'Vem celebrar! A partir das 17h. O horário pode ser ajustado dependendo do jogo do Brasil.',
+      inicio: '20260704T170000', // 4 jul 2026, 17h (horário local)
+      fim:    '20260704T200000', // duração padrão 3h
+    };
+
+    // Google Calendar + Apple (.ics)
+    (function () {
+      const g = new URL('https://calendar.google.com/calendar/render');
+      g.searchParams.set('action', 'TEMPLATE');
+      g.searchParams.set('text', EVENTO.titulo);
+      g.searchParams.set('dates', `${EVENTO.inicio}/${EVENTO.fim}`);
+      g.searchParams.set('details', EVENTO.descricao);
+      g.searchParams.set('location', EVENTO.local);
+      g.searchParams.set('ctz', 'America/Sao_Paulo');
+      document.getElementById('calGoogle').href = g.toString();
+
+      const ics = [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//Aniversario//PT-BR//',
+        'BEGIN:VEVENT',
+        `UID:${Date.now()}@aniversario`,
+        `DTSTART;TZID=America/Sao_Paulo:${EVENTO.inicio}`,
+        `DTEND;TZID=America/Sao_Paulo:${EVENTO.fim}`,
+        `SUMMARY:${EVENTO.titulo}`,
+        `LOCATION:${EVENTO.local}`,
+        `DESCRIPTION:${EVENTO.descricao}`,
+        'END:VEVENT',
+        'END:VCALENDAR',
+      ].join('\r\n');
+      const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+      document.getElementById('calApple').href = URL.createObjectURL(blob);
+    })();
 
     function addCompanion() {
       document.getElementById('companionBlock').style.display = 'block';
@@ -527,3 +623,4 @@
   </script>
 </body>
 </html>
+
